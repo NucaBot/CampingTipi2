@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+     <link rel="stylesheet" href="estilosFront.css">
+
+</head>
+<body>
+<header>
+    <h1>Camping Tipi</h1>
+  </header>
+
+<nav>
+  <div class="menu">
+    <a href="index.html">Home</a>
+    <a href="nuestroCamping.html">Nuestro Camping</a>
+    <a href="contacto.html">Contacto</a>
+  </div>
+  <div class="user-menu">
+    <a href="login.html">Identificarse</a>
+    <a href="registro.html">Registrarse</a>
+  </div>
+</nav>
+
+  <section>
+    <h1>Bienvenidos al Camping Tipi</h1>
+    <div class="formulario">
+
+      <form name="altaClientes" action="Sv_clientes" method="post" class="contact-form">
+        <ul>
+          <li>
+            <input type="hidden" name="id" value="0">
+
+            <label>Nombre:</label>
+            <input type="text" name="nombre" required placeholder="Nombre">
+          </li>
+
+          <li>
+            <label>Apellidos:</label>
+            <input type="text" name="apellidos" required placeholder="Apellidos">
+          </li>
+
+          <li>
+            <label>Password:</label>
+            <input type="text" name="password" required placeholder="Password">
+          </li>
+          <label>DNI:</label>
+          <input type="dni" name="dni" required placeholder="DNI">
+          </li>
+
+          <li>
+            <label>Dirección:</label>
+            <input type="text" name="direccion" required placeholder="Dirección">
+          </li>
+
+          <li>
+            <label>Teléfono:</label>
+            <input type="telefono" name="telefono" required placeholder="Teléfono">
+          </li>
+
+          <li>
+            <label>Fecha de nacimiento:</label>
+            <input type="date" name="fechaNacimiento" required placeholder="Fecha de nacimiento">
+          </li>
+
+          <li>
+            <label>Correo electrónico</label>
+            <input type="email" name="correoElectronico" required placeholder="Correo electrónico">
+          </li>
+
+         
+
+          <input type="submit" value="Guardar">
+        </ul>
+      </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Camping Tipi. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,18 @@
+Crear un nuevo repositorio desde línea de comandos
+
+touch README.md
+git init
+git checkout -b main
+git add README.md
+
+
+git commit -m "first commit"
+git remote add origin http://ciberkaos.synology.me:8418/casa/CampingTipiWeb.git
+git push -u origin main
+
+
+
+Hacer push de un repositorio existente desde línea de comandos
+
+git remote add origin http://ciberkaos.synology.me:8418/casa/CampingTipiWeb.git
+git push -u origin main

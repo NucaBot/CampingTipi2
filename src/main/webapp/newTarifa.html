@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tarifas</title>
+      <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="container">
+  <header>Administrador Camping Tipi</header>
+<nav>
+       <div class="menu">
+           <a href="indexAdmin.html">Home</a>
+           <a href="newReserva.html">Reservas</a>
+           <a href="newCliente.html">Clientes</a>
+           <a href="newEstado.html">Estados</a>
+           <a href="newMetodo.html">Métodos</a>
+           <a href="newParcela.html">Parcelas</a>
+           <a href="newTarifa.html">Tarifas</a>
+       </div>
+       <a href="Sv_logout" class="cerrar-sesion">
+           <i class="fas fa-sign-out-alt"></i>
+           Cerrar sesión
+       </a>
+   </nav>
+
+  <section>
+    <h2>Tarifas</h2>
+<div class="formulario">
+
+    <form name="altaTarifas" action="Sv_tarifa" method="post">
+      <ul>
+        <li>
+          <label>Vehículos:</label>
+          <input type="text" name="vehiculo" required>
+        </li>
+        <li>
+          <label>Adultos:</label>
+          <input type="text" name="adulto" required>
+        </li>
+        <li>
+          <label>Menores:</label>
+          <input type="text" name="menor" required>
+        </li>
+        <li>
+          <label>Toma de luz:</label>
+          <input type="radio" name="tomaLuz" required>
+        </li>
+        <li>
+          <label>Toma de agua:</label>
+          <input type="radio" name="tomaAgua" required>
+        </li>
+        <input type="submit" value="Guardar">
+      </ul>
+    </form>
+    </div>
+  </section>
+</div>
+</body>
+</html>

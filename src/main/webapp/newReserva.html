@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservas</title>
+
+  <link rel="stylesheet" href="estilos.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <style>
+
+    ul{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul li{
+      padding-bottom: 3px;
+    }
+
+	#lista	ul {
+      list-style-type: none;
+      padding-left: 20px;
+      margin: 5px 0;
+      border-left: 2px solid #ccc;
+    }
+
+    #lista li {
+      margin: 6px 0;
+      padding: 6px 12px;
+      background-color: #fff;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      position: relative;
+    }
+
+   #lista li::before {
+      content: "•";
+      color: #4a90e2;
+      font-size: 18px;
+      position: absolute;
+      left: -12px;
+      top: 10px;
+    }
+
+    #lista li:hover {
+      background-color: #f0f8ff;
+    }
+
+  </style>
+
+<script>
+
+fetch("proteccion", {
+    method: "GET",
+    credentials: "include"
+})
+    .then(response => response.json())
+    .then(data => {
+        if (data.redirect) {
+            window.location.href = data.redirect; // esto debería redirigir
+        } else {
+            // manejar el contenido normal
+        }
+    });
+
+function llamada() {
+	const output = document.getElementById("jsonOutput");
+
+	fetch('Sv_reservas?op=1')
+	.then(response => response.json())
+	.then(data => mostrarJSON(data, output))
+
+}
+
+
+
+function mostrarJSON(data, parent) {
+  if (Array.isArray(data)) {
+    data.forEach((item, index) => {
+      const li = document.createElement("li");
+      li.textContent = `Elemento ${index}:`;
+      parent.appendChild(li);
+      const ul = document.createElement("ul");
+      li.appendChild(ul);
+      mostrarJSON(item, ul);
+    });
+  } else if (typeof data === "object" && data !== null) {
+    for (let clave in data) {
+      const valor = data[clave];
+      const li = document.createElement("li");
+      if (typeof valor === "object" && valor !== null) {
+        li.textContent = `${clave}:`;
+        const ul = document.createElement("ul");
+        li.appendChild(ul);
+        mostrarJSON(valor, ul);
+      } else {
+        li.textContent = `${clave}: ${valor}`;
+      }
+      parent.appendChild(li);
+    }
+  } else {
+    const li = document.createElement("li");
+    li.textContent = data;
+    parent.appendChild(li);
+  }
+}
+
+
+
+function crearSelectMetodos(){ 
+ 
+	fetch("Sv_metodos?op=4")
+    .then(response => response.json())
+    .then(datos => {
+      const select = document.getElementById("metodos");
+      datos.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.idMetodo;
+        option.textContent = item.metodo;
+        select.appendChild(option);
+      });
+    });
+  
+  
+}
+
+
+function crearSelectEstados(){ 
+ 
+	fetch("Sv_estados?op=4")
+    .then(response => response.json())
+    .then(datos => {
+      const select = document.getElementById("estados");
+      datos.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.idEstado;
+        option.textContent = item.estado;
+        select.appendChild(option);
+      });
+    });
+  
+  
+}
+
+function crearSelectParcelas(){ 
+	 
+	fetch("Sv_parcelas?op=4")
+    .then(response => response.json())
+    .then(datos => {
+      const select = document.getElementById("parcelas");
+      datos.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.idParcela;
+        option.textContent = item.tipoParcela;
+        select.appendChild(option);
+      });
+    });
+  
+  
+}
+
+
+function autoCompetarCliente(){
+	
+	let clientes = [];
+
+	  fetch('Sv_clientes?op=1') // o tu endpoint dinámico
+	  .then(res => res.json())
+	    .then(data => {
+	      clientes = data;
+
+	      const datalist = document.getElementById('clientes');
+	      data.forEach(cliente => {
+	        const option = document.createElement('option');
+	        option.value = cliente.correoElectronico;
+	        datalist.appendChild(option);
+	      });
+	    });
+
+	  document.getElementById('clienteInput').addEventListener('input', function () {
+	    const correo = this.value;
+	    const cliente = clientes.find(c => c.correoElectronico === correo);
+
+	    if (cliente) {
+	      document.getElementById('clienteId').value = cliente.idCliente;
+	      document.getElementById('nombre').value = cliente.nombre;
+	      document.getElementById('apellidos').value = cliente.apellidos;
+	    } else {
+	      document.getElementById('clienteId').value = '';
+	      document.getElementById('nombre').value = '';
+	      document.getElementById('apellidos').value = '';
+	    }
+	  });
+	
+}
+
+
+window.onload = function(){
+	crearSelectMetodos();	
+	crearSelectEstados();
+	crearSelectParcelas();
+	autoCompetarCliente();
+	llamada();
+	
+}
+
+</script>
+
+
+
+</head>
+<body>
+
+<div class="container">
+
+ 
+<header>Administrador Camping Tipi</header>
+
+
+   <nav>
+       <div class="menu">
+           <a href="indexAdmin.html">Home</a>
+           <a href="newReserva.html">Reservas</a>
+           <a href="newCliente.html">Clientes</a>
+           <a href="newEstado.html">Estados</a>
+           <a href="newMetodo.html">Métodos</a>
+           <a href="newParcela.html">Parcelas</a>
+           <a href="newTarifa.html">Tarifas</a>
+       </div>
+       <a href="Sv_logout" class="cerrar-sesion">
+           <i class="fas fa-sign-out-alt"></i>
+           Cerrar sesión
+       </a>
+   </nav>
+
+
+    <a href="#lista">Lista Reservas</a>
+
+  <section>
+    <h2>Reservas</h2>
+<div class="formulario">
+
+    <form name="altaReservas" action="Sv_reservas" method="post">
+      <ul>
+        <li>
+        <label for="clienteInput">Correo del cliente:</label>
+  <input list="clientes" id="clienteInput" name="cliente" autocomplete="off">
+  <datalist id="clientes"></datalist>
+      
+  <label for="clienteInput">Nombre y Apellidos:</label>
+  <input type="text" id="nombre" disabled style="display: inline">
+  <input type="text" id="apellidos" disabled style="display: inline">
+  <!-- Campo oculto para guardar el ID -->
+  <input type="hidden" id="clienteId" name="clienteId">
+          
+        </li>
+
+        <li>
+          <label>Parcela:</label>
+           <select name="parcela" id="parcelas">
+            <option value="0">...</option>
+           
+          </select>
+        </li>
+
+        <li>
+          <label>Adultos:</label>
+          <input type="number" name="adulto" required>
+        </li>
+
+        <li>
+          <label>Menores:</label>
+          <input type="number" name="menor" required>
+        </li>
+
+        <li>
+          <label>Vehículos:</label>
+          <input type="number" name="vehiculo" required>
+        </li>
+
+        <li>
+          <label>Toma de luz:</label>
+          Sí<input type="radio" name="tomaLuz" value="1" >
+          No<input type="radio" name="tomaLuz" value="0" >
+        </li>
+
+        <li>
+          <label>Toma de agua:</label>
+          Sí<input type="radio" name="tomaAgua" value="1">
+          No<input type="radio" name="tomaAgua" value="0">
+        </li>
+
+        <li>
+          <label>Fecha de entrada:</label>
+          <input type="date" name="fechaEntrada" required>
+        </li>
+
+        <li>
+          <label>Fecha de Salida:</label>
+          <input type="date" name="fechaSalida" required>
+        </li>
+
+        <li>
+          <label>Método:</label>
+          <select name="metodo" id="metodos">
+            <option value="0">...</option>
+           
+          </select>
+        </li>
+
+        <li>
+          <label>Estado:</label>
+          <select name="estado" id="estados">
+            <option value="0">...</option>
+            
+           
+         </select>
+        </li>
+
+        <input type="submit" value="Guardar">
+      </ul>
+    </form>
+    </div>
+    
+    <div class="datos">
+    
+    <div id="lista">
+    <ul id="jsonOutput"></ul>
+    </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

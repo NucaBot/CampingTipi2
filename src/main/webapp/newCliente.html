@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+    
+<link rel="stylesheet" href="estilos.css">
+<script type="text/javascript">
+
+    fetch("proteccion", {
+        method: "GET",
+        credentials: "include"
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.redirect) {
+                window.location.href = data.redirect; // esto debería redirigir
+            } else {
+                // manejar el contenido normal
+            }
+        });
+
+function llamada(){
+
+
+	
+	if(getQueryVariable("id") != ""){
+		
+		fetch('Sv_clientes?op=2&id='+getQueryVariable("id"))
+		.then(response => response.json())
+		.then(data => pintarFormulario(data))
+
+
+    }else{
+		
+		fetch('Sv_clientes?op=1')
+		.then(response => response.json())
+		.then(data => pintarTabla(data))
+	}
+}
+
+function borrar(id) {
+
+    if(confirm("Seguro que quieres borrar el cliente?")) {
+        fetch('Sv_clientes?op=3&id=' +id)
+        location.reload()
+    }
+
+}
+
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable) {
+            return pair[1];
+        }
+    }
+    return false;
+ }
+ 
+
+function pintarTabla(datos){
+	console.log(datos)
+	let tabla = "<table border=1>"; 
+	tabla += "<tr><th>ID</th><th>Nombre</th><th>Apellidos</th><th>E-Mail</th><th>Teléfono</th></tr>";
+	for(let i=0;i<datos.length;i++){
+			tabla += "<tr><td>" + datos[i].idCliente		 
+			+ "</td><td>" + datos[i].nombre 
+			+ "</td><td>" + datos[i].apellidos 
+			+ "</td><td>" + datos[i].correoElectronico
+			+ "</td><td>" + datos[i].telefono 
+
+
+			+ "<td><a href='newCliente.html?id="+datos[i].idCliente+"' class='btn-editar'>Editar</a></td>"
+			+ "<td><a href='javascript:borrar("+datos[i].idCliente+")' class='btn-borrar'>Borrar</a></td></tr>";
+
+	}	
+	tabla += "</table>";
+		document.querySelector('#lista').innerHTML = tabla;
+}
+
+
+function pintarFormulario(datos){
+	document.querySelector('#titulo').innerHTML = "Editar Cliente";
+	document.getElementsByName("id")[0].value = datos.idCliente;
+	document.getElementsByName("nombre")[0].value = datos.nombre;
+	document.getElementsByName("apellidos")[0].value = datos.apellidos;
+	document.getElementsByName("password")[0].value = datos.password;
+	document.getElementsByName("direccion")[0].value = datos.direccion;
+	document.getElementsByName("dni")[0].value = datos.dni;
+	document.getElementsByName("telefono")[0].value = datos.telefono;
+	document.getElementsByName("fechaNacimiento")[0].value = datos.fechaNacimiento;
+	document.getElementsByName("correoElectronico")[0].value = datos.correoElectronico;
+	document.getElementsByName("preferenciasCliente")[0].value = datos.preferenciasCliente;
+
+	
+}
+
+
+window.onload = function(){
+	llamada(0);	
+
+	
+}
+
+</script>
+    
+    
+</head>
+
+<body>
+<div class="container">
+
+  <header>Administrador Camping Tipi</header>
+
+
+   <nav>
+       <div class="menu">
+           <a href="indexAdmin.html">Home</a>
+           <a href="newReserva.html">Reservas</a>
+           <a href="newCliente.html">Clientes</a>
+           <a href="newEstado.html">Estados</a>
+           <a href="newMetodo.html">Métodos</a>
+           <a href="newParcela.html">Parcelas</a>
+           <a href="newTarifa.html">Tarifas</a>
+       </div>
+       <a href="Sv_logout" class="cerrar-sesion">
+           <i class="fas fa-sign-out-alt"></i>
+           Cerrar sesión
+       </a>
+   </nav>
+
+
+  <section>
+    <h2 id="titulo">Nuevo Cliente</h2>
+    <a href="#lista">Lista clientes</a>
+
+<div class="formulario">
+
+    <form name="altaClientes" action="Sv_clientes" method="post">
+      <ul>
+        <li>
+                  <input type="hidden" name="id" value="0">
+        
+          <label>Nombre:</label>
+          <input type="text" name="nombre" required placeholder="Nombre">
+        </li>
+
+        <li>
+          <label>Apellidos:</label>
+          <input type="text" name="apellidos" required placeholder="Apellidos">
+        </li>
+
+        <li>
+        <li>
+          <label>Password:</label>
+          <input type="text" name="password" required placeholder="Password">
+        </li>
+          <label>DNI:</label>
+          <input type="dni" name="dni" required placeholder="DNI">
+        </li>
+
+        <li>
+          <label>Dirección:</label>
+          <input type="text" name="direccion" required placeholder="Dirección">
+        </li>
+
+        <li>
+          <label>Teléfono:</label>
+          <input type="telefono" name="telefono" required placeholder="Teléfono">
+        </li>
+
+        <li>
+           <label>Fecha de nacimiento:</label>
+           <input type="date" name="fechaNacimiento" required placeholder="Fecha de nacimiento">
+        </li>
+
+        <li>
+          <label>Correo electrónico</label>
+          <input type="email" name="correoElectronico" required placeholder="Correo electrónico">
+        </li>
+
+        <li>
+          <label>Preferencias del cliente:</label>
+          <input type="text" name="preferenciasCliente" required placeholder="Preferencias del cliente">
+        </li>
+
+        <input type="submit" value="Guardar">
+      </ul>
+    </form>
+    
+    </div>
+    
+    <div class="datos">
+    
+    <div id="lista">
+    
+    </div>
+    </div>
+    
+    
+  </section>
+</div>
+</body>
+</html>

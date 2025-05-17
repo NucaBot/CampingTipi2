@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parcelas</title>
+
+  <link rel="stylesheet" href="estilos.css">
+  <script type="text/javascript">
+
+    fetch("Sv_parcelas", {
+      method: "GET",
+      credentials: "include"
+    })
+            .then(response => response.json())
+            .then(data => {
+              if (data.redirect) {
+                window.location.href = data.redirect; // esto debería redirigir
+              } else {
+                // manejar el contenido normal
+              }
+            });
+
+    function llamada(){
+
+
+
+      if(getQueryVariable("id") != ""){
+
+        fetch('Sv_parcelas?op=2&id='+getQueryVariable("id"))
+                .then(response => response.json())
+                .then(data => pintarFormulario(data))
+
+
+      }else{
+
+        fetch('Sv_parcelas?op=1')
+                .then(response => response.json())
+                .then(data => pintarTabla(data))
+      }
+    }
+
+    function borrar(id) {
+
+      if(confirm("Seguro que quieres borrar el cliente?")) {
+        fetch('Sv_parcelas?op=3&id=' +id)
+        location.reload()
+      }
+
+    }
+
+    function getQueryVariable(variable) {
+      var query = window.location.search.substring(1);
+      var vars = query.split("&");
+      for (var i=0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable) {
+          return pair[1];
+        }
+      }
+      return false;
+    }
+
+
+    function pintarTabla(datos){
+      console.log(datos)
+      let tabla = "<table border=1>";
+      for(let i=0;i<datos.length;i++){
+        tabla += "<tr><td>" + datos[i].idParcela
+                + "</td><td>" + datos[i].tipoParcela
+                + "</td><td>" + datos[i].descripcion
+
+        if(datos[i].foto != null) {
+          tabla += "</td><td><img src='fotos/" + datos[i].foto + "' width='150' height='150'>"
+        }else{
+          tabla += "</td><td>"
+        }
+
+
+        tabla +="</td><td>" + datos[i].precioNoche
+                + "<td><a href='newParcela.html?id="+datos[i].idParcela+"' class='btn-editar'>Editar</a></td>"
+                + "<td><a href='javascript:borrar("+datos[i].idParcela+")' class='btn-borrar'>Borrar</a></td></tr>";
+
+      }
+      tabla += "</table>";
+      document.querySelector('#lista').innerHTML = tabla;
+    }
+
+
+    function pintarFormulario(datos){
+      document.querySelector('#titulo').innerHTML = "Editar Parcela";
+      document.getElementsByName("id")[0].value = datos.idCliente;
+      document.getElementsByName("nombre")[0].value = datos.nombre;
+      document.getElementsByName("apellidos")[0].value = datos.apellidos;
+      document.getElementsByName("password")[0].value = datos.password;
+      document.getElementsByName("direccion")[0].value = datos.direccion;
+      document.getElementsByName("dni")[0].value = datos.dni;
+      document.getElementsByName("telefono")[0].value = datos.telefono;
+      document.getElementsByName("fechaNacimiento")[0].value = datos.fechaNacimiento;
+      document.getElementsByName("correoElectronico")[0].value = datos.correoElectronico;
+      document.getElementsByName("preferenciasCliente")[0].value = datos.preferenciasCliente;
+
+
+    }
+
+
+    window.onload = function(){
+      llamada(0);
+
+
+    }
+
+  </script>
+
+
+
+
+</head>
+<body>
+<div class="container">
+
+  <header>Camping Tipi</header>
+  <nav>
+    <div class="menu">
+      <a href="index.html">Home</a>
+      <a href="newReserva.html">Reservas</a>
+      <a href="newCliente.html">Clientes</a>
+      <a href="newEstado.html">Estados</a>
+      <a href="newMetodo.html">Métodos</a>
+      <a href="newParcela.html">Parcelas</a>
+      <a href="newTarifa.html">Tarifas</a>
+    </div>
+    <a href="Sv_logout" class="cerrar-sesion">
+      <i class="fas fa-sign-out-alt"></i>
+      Cerrar sesión
+    </a>
+  </nav>
+  <section>
+    <h2>Parcelas</h2>
+    <div class="formulario">
+
+    <form name="altaParcelas" action="Sv_parcelas" method="post" enctype="multipart/form-data">
+      <ul>
+        <li><label>Tipo de parcela:</label>
+          <input type="text" name="tipoParcela" required>
+        </li>
+
+        <li>
+          <label>Descripción:</label>
+          <textarea name="descripcion" cols="90" rows="15"></textarea>
+        </li>
+
+        <li>
+          <label>Foto:</label>
+          <input type="file" name="foto" required>
+        </li>
+
+        <li>
+          <label>Precio por noche:</label>
+          <input  type="text" name="precioNoche" required>
+        </li>
+        <input type="submit" value="Guardar">
+      </ul>
+    </form>
+    </div>
+
+
+    <div class="datos">
+
+      <div id="lista">
+
+      </div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

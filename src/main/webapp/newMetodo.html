@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alta Métodos de Pago</title>
+     <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<div class="container">
+<header>Administrador Camping Tipi</header>
+
+  <nav>
+       <div class="menu">
+           <a href="indexAdmin.html">Home</a>
+           <a href="newReserva.html">Reservas</a>
+           <a href="newCliente.html">Clientes</a>
+           <a href="newEstado.html">Estados</a>
+           <a href="newMetodo.html">Métodos</a>
+           <a href="newParcela.html">Parcelas</a>
+           <a href="newTarifa.html">Tarifas</a>
+       </div>
+       <a href="Sv_logout" class="cerrar-sesion">
+           <i class="fas fa-sign-out-alt"></i>
+           Cerrar sesión
+       </a>
+   </nav>
+
+
+    <a href="#lista">Lista Estados</a>
+
+
+    <section>
+        <h2>Alta Métodos de Pago</h2>
+<div class="formulario">
+        <form name="altaMetodos" action="Sv_metodo" method="post">
+            <ul>
+                <li>
+                    <label>Método de pago:</label>
+                    <input type="text" name="metodo" required>
+                </li>
+                <input type="submit" value="Guardar">
+            </ul>
+        </form>
+ </div>
+    </section>
+</div>
+</body>
+</html>
