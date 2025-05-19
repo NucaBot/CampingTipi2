@@ -35,7 +35,7 @@ public class DBconexion {
 
 			Properties props = new Properties();
 			props.put("user", "devel_tipi");
-			props.put("password", "Proyectos_2025");
+			props.put("password", "");
 
 			// Crea una nueva conexión usando la URL y las credenciales.
 

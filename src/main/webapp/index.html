@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-     <link rel="stylesheet" href="estilosFront.css">
-
+     <link rel="stylesheet" href="home.css">     
 </head>
 <body>
 <header>
@@ -24,15 +23,139 @@
 </nav>
 
   <section>
-    <h1>Bienvenidos al Camping Tipi</h1>
-    <p>Ubicado en plena naturaleza, nuestro camping ofrece una experiencia única para los amantes del aire libre.</p>
-    <p>Contamos con parcelas amplias, zonas de acampada libre, bungalows totalmente equipados y una piscina natural.</p>
-    <p>Actividades para toda la familia: senderismo, escalada, talleres infantiles y rutas en bicicleta.</p>
-    <p>¡Ven a desconectar y a disfrutar de la tranquilidad del bosque!</p>
+    <div class="titulodiv">
+      <p class="subtitulo">¿Adónde vas de vacaciones?</p>
+      <p class="Titulo">Bienvenidos al Camping Tipi</p>
+    </div>
+  
+    <div class="contenido">
+    <div class="textoCenter">
+         <p class="subtituloBlack">Camping y Glamping en Camping Tipi</p>
+        <div class="main-image" id="imageRow">
+        <img src="./img/Apartados.png" alt="Imagen" 1 id="mainDisplay">
+        <img src="./img/fondo.png" alt="Imagen 3" >
+        <img src="./img/isla.png" alt="Imagen 2">
+      </div>
+
+      <div class="thumbnail-bar">
+        <img src="./img/rec 1.png" alt="1" onclick="setImage(0)">
+        <img src="./img/rec 1.png" alt="2" onclick="setImage(1)">
+        <img src="./img/rec 1.png" alt="3" onclick="setImage(2)">
+      </div>
+    </div>
+    </div>
+    <div class="contenido fondoGreen">
+              <div class="Parte1">
+                  <div class="textoCenteReservados">
+                  <p class="subtituloBlack">TODO LO QUE OFRECEMOS</p>
+                    <p class="TituloBlack ">SERVICIOS</p>
+                  <div class="descripcionReserva">
+                      <div class="radiosTitulo ">
+                        <img class="margin18px" src="./img/carpa-para-camping.png" alt="">
+                        <p class="texto18px">ALOJAMIENTOS</p>
+                        <p class="texto16px">Descubre todas las opciones de alojamientos que tenemos para ti</p>
+                      </div>
+      
+                    <div class="radiosTitulo ">
+                        <img class="margin18px" src="./img/carpa-para-camping.png" alt="">
+                        <p class="texto18px">RESERVAS</p>
+                        <p class="texto16px">Reserva para tus vacaciones, y disfruta de nuestro camping sin preocupaciones</p>
+                      </div>
+
+                    <div class="radiosTitulo ">
+                        <img class="margin18px" src="./img/carpa-para-camping.png" alt="">
+                        <p class="texto18px">TARIFAS</p>
+                        <p class="texto16px">¡Descubre nuestro camping a un precio sorprendente!</p>
+                      </div>
+                      
+                    <div class="radiosTitulo ">
+                        <img class="margin18px" src="./img/carpa-para-camping.png" alt="">
+                        <p class="texto18px">CONTACTO</p>
+                        <p class="texto16px">Atención personalizada, siempre disponible para escuchar tus necesidades</p>
+                      </div>  
+                  </div>
+                  </div>
+              </div> 
+          
+    </div>
+     
+    <div class="contenido">
+      <div class="Parte1">
+          <div class="textoCenter">
+          <p class="texto24px">Bell XL</p>
+          <div class="descripcion">
+              <div class="radiosTitulo1"><p class="texto18px">2 - 4 Personas</p></div>
+              <div class="radiosTitulo1"><p class="texto18px">20 m²</p></div>
+              <div class="radiosTitulo1"><p class="texto18px">3 m Altura</p></div>
+          </div>
+          <p >Una tienda muy polivalente que se adapta a las necesidades de cada grupo y que puede alojar hasta 4 personas en 2 camas dobles. Una opción a tener en cuenta por familias con niños, pequeños grupos de amigos o por parejas que necesitan un extra de espacio. (*) No incluye frigorífico eléctrico.</p>
+          <a href="nuestroCamping.html" class="botonDiseño">
+          <p class="texto18px">Ver Más</p>
+          </a>
+          </div>
+    
+    </div>
+     <div class="Parte1">
+        <div class="textoCenter">
+        <img src="./img/Apartados.png" alt="">
+        </div>
+    </div>
+     </div>
+      
+    
   </section>
 
   <footer>
     <p>&copy; 2025 Camping Tipi. Todos los derechos reservados.</p>
   </footer>
+
+  <script>
+  const imageRow = document.getElementById("imageRow");
+
+  const imageSources = [
+    "./img/Apartados.png",   // 0 = Imagen 1
+    "./img/parte1.png",      // 1 = Imagen 2
+    "./img/isla.png"         // 2 = Imagen 3
+  ];
+
+  function setImage(selectedIndex) {
+    const total = imageSources.length;
+    let reordered = [];
+
+    // Imagen anterior a la seleccionada (posición 0)
+    reordered.push(imageSources[(selectedIndex + 1) % total]);
+
+    // Imagen seleccionada (posición 1)
+    reordered.push(imageSources[selectedIndex]);
+
+    // Imagen siguiente a la seleccionada (posición 2)
+    reordered.push(imageSources[(selectedIndex + 2) % total]);
+
+    // Limpiar contenedor
+    imageRow.innerHTML = "";
+
+    // Insertar imágenes en el nuevo orden
+    reordered.forEach((src, index) => {
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = "Imagen";
+      img.classList.add("galeria-img", `pos-${index + 1}`);
+      imageRow.appendChild(img);
+    });
+
+
+    // Resaltar miniatura activa
+    document.querySelectorAll(".thumbnail-bar img").forEach((img, index) => {
+      img.classList.toggle("active", index === selectedIndex);
+    });
+  }
+
+  // Mostrar galería al inicio
+  setImage(0);
+</script>
+
+
+
+
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-     <link rel="stylesheet" href="estilosFront.css">
+     <link rel="stylesheet" href="contacto.css">
 
 </head>
 <body>
@@ -24,24 +24,40 @@
 </nav>
 
   <section>
-    <h1>Contactar</h1>
-    <p>¿Tienes alguna duda o sugerencia? Rellena el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+    <div class="titulodiv">
+      <p class="Titulo">Camping Tipi</p>
+      <p class="Titulo">Contactar Con Nosotros</p>
+    </div>
+   
+    <div class="contenido">
+    <div class="Parte1">
+      <div class="textoCenter">
+         <p class="texto24px">Camping Tipi</p>
+         <p>Bienvenidos a Camping Tipi, un refugio perfecto en el corazón de la naturaleza, donde el descanso y la aventura se combinan para ofrecerte unas vacaciones inolvidables.</p>
+      </div>
+   
+    <img src="./img/Apartados.png"></img>
+    </div>
+     <form action="#" method="post" class="contact-form">
+      <p class="TituloBlack">Contactar Con Nosotros</p>
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" required>
 
-    <form action="#" method="post" class="contact-form">
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" required>
+          <label for="email">Correo electrónico:</label>
+          <input type="email" id="email" name="email" required>
 
-      <label for="email">Correo electrónico:</label>
-      <input type="email" id="email" name="email" required>
+          <label for="telefono">Teléfono:</label>
+          <input type="tel" id="telefono" name="telefono">
 
-      <label for="telefono">Teléfono:</label>
-      <input type="tel" id="telefono" name="telefono">
+          <label for="comentarios">Notas:</label>
+          <textarea id="comentarios" name="comentarios" rows="5" required></textarea>
 
-      <label for="comentarios">Comentarios:</label>
-      <textarea id="comentarios" name="comentarios" rows="5" required></textarea>
+          <button type="submit">Enviar</button>
+    </form>  
+   
+    </div>
 
-      <button type="submit">Enviar</button>
-    </form>
+   
   </section>
 
   <footer>

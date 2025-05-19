@@ -1,0 +1,316 @@
+@charset "UTF-8";
+ * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background-color: #2e8b57;
+      padding: 20px;
+      color: white;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #3cb371;
+      padding: 10px 20px;
+    }
+
+    .menu, .user-menu {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    nav .menu a:hover {
+      background-color: #2e8b57;
+    }
+
+    nav .user-menu a {
+      background-color: #ffffff;
+      color: #3cb371;
+    }
+
+    nav .user-menu a:hover {
+      background-color: #eeeeee;
+    }
+
+    /* section {
+      padding: 30px;
+    } */
+
+    section h1 {
+      margin-bottom: 20px;
+      color: #2e8b57;
+    }
+
+    section p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    footer {
+      background-color: #2e8b57;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+
+.contact-form {
+    max-width: 600px;
+    margin: 30px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form label {
+    font-weight: bold;
+    color: #2e8b57;
+}
+
+.contact-form ul{
+	list-style: none;
+    margin-bottom: 10px;
+}
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #3cb371;
+    outline: none;
+    box-shadow: 0 0 5px rgba(60, 179, 113, 0.5);
+}
+
+.contact-form button {
+    background-color: #3cb371;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+    background-color: #2e8b57;
+}
+
+.subtitulo{
+    font-size: 24px;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    width: 1000px;
+}
+
+.TituloBlack{
+    font-size: 44px;
+    color: black;
+    font-weight: 700;
+}
+
+.subtituloBlack{
+    font-size: 24px;
+    color: black;
+    /* font-weight: 700; */
+    text-align: center;
+    /* width: 1000px; */
+}
+
+.contenido {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 20px 32px;
+    justify-content: space-around;
+}
+
+.titulodiv {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ background-image: url("/grupo3_camping_tipi/main/webapp/img/fondo.png");
+ height: 300px;
+}
+
+.Titulo{
+    font-size: 48px;
+    color: white;
+}
+.TituloBlack{
+    font-size: 48px;
+    color: black;
+}
+
+/* imagen */
+
+    .main-image {
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        margin-top: 20px;
+    }
+
+    .main-image img {
+      height: 300px;
+      display: block;
+      transition: all 0.3s ease;
+    }
+
+    .thumbnail-bar {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+      gap: 10px;
+      height: 110px;
+      padding: 10px;
+    }
+
+    .thumbnail-bar img {
+      height: 24px;
+      cursor: pointer;
+      width: 24px;
+      border-radius: 6px;
+      transition: transform 0.2s ease, border 0.2s ease;
+      border: 3px solid transparent;
+    }
+
+    .thumbnail-bar img:hover,
+    .thumbnail-bar img.active {
+      transform: scale(1.05);
+      border: 3px solid black;
+      border-radius: 60px;
+    }
+
+    
+/* Estilos según posición */
+.pos-1, .pos-3 {
+  width: 200px;
+}
+
+.galeria-img {
+  border-radius: 6px;
+  transition: transform 0.3s ease, width 0.3s ease;
+}
+
+.pos-2 {
+  width: 500px;
+}
+
+
+.Parte1{
+ display: flex;
+ width: 600px;
+ flex-direction: column;
+ gap: 12px;
+ margin: 32px;
+}
+
+.texto24px{
+    font-size: 32px;
+    font-weight: 700;
+    color: black;
+}
+
+.textoCenter{
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.texto18px{
+    font-size: 18px;
+    margin:2px 4px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.texto16px{
+    font-size: 16px;
+    margin:2px 4px;
+    text-align: center;
+}
+.texto18pxWhite{
+    font-size: 16px;
+    margin:2px 4px;
+    font-weight: 700;
+    color: white;
+}
+
+.descripcion{
+    display: flex;
+    gap: 13px;
+    flex-direction: row;
+}
+
+.descripcionReserva{
+    display: flex;
+    gap: 24px;
+    flex-direction: row;
+}
+
+.botonDiseño{
+    border: 1px solid #D8E2C1;
+    border-radius: 11px;
+    background-color: #D8E2C1;
+}
+
+.margin18px{
+    margin: 18px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.fondoGreen {
+    background-color: #D8E2C1;
+    margin: 0px;
+}
+
+.radiosTitulo{
+    /* border: 1px solid black;
+    border-radius: 11px; */
+    display: flex;
+    width: 200px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.radiosTitulo1{
+    border: 1px solid black;
+    border-radius: 11px;
+    display: flex;
+    /* width: 150px; */
+    flex-direction: column;
+    align-items: center;
+}
+
+.textoCenteReservados{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
