@@ -110,88 +110,74 @@ window.onload = function(){
     
 </head>
 
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+     <link rel="stylesheet" href="home.css">     
+</head>
 <body>
-<div class="container">
+<header>
+    <h1>Camping Tipi</h1>
+</header>
 
-  <header>Administrador Camping Tipi</header>
+<nav>
+  <div class="menu">
+    <a href="index.html">Home</a>
+    <a href="nuestroCamping.html">Nuestro Camping</a>
+    <a href="contacto.html">Contacto</a>
+  </div>
+  <div class="user-menu">
+    <a href="login.html">Identificarse</a>
+    <a href="registro.html">Registrarse</a>
+  </div>
+</nav>
+<div>
+<h2 id="titulo" class="titulo_Center">Nuevo Cliente</h2>
+</div>
+<div class="contenedor-flex">
+  <div class="columna">
+    <div class="form-section-newCliente">
+      <p class="h3clientes">Datos Personales</p>
+      <form name="altaClientes" action="Sv_clientes" method="post" class="form-personal">
+        <input type="hidden" name="id" value="0">
 
+        <label>Nombre y Apellido:</label>
+        <input type="text" name="nombre" required placeholder="Nombre y Apellido">
 
-   <nav>
-       <div class="menu">
-           <a href="indexAdmin.html">Home</a>
-           <a href="newReserva.html">Reservas</a>
-           <a href="newCliente.html">Clientes</a>
-           <a href="newEstado.html">Estados</a>
-           <a href="newMetodo.html">Métodos</a>
-           <a href="newParcela.html">Parcelas</a>
-           <a href="newTarifa.html">Tarifas</a>
-       </div>
-       <a href="Sv_logout" class="cerrar-sesion">
-           <i class="fas fa-sign-out-alt"></i>
-           Cerrar sesión
-       </a>
-   </nav>
+        <label>Fecha de nacimiento:</label>
+        <input type="date" name="fechaNacimiento" required>
 
+        <label>Sexo:</label>
+        <select name="sexo" required>
+          <option value="hombre">Hombre</option>
+          <option value="mujer">Mujer</option>
+          <option value="otro">Otro</option>
+        </select>
 
-  <section>
-    <h2 id="titulo">Nuevo Cliente</h2>
-    <a href="#lista">Lista clientes</a>
+        <label>Correo electrónico:</label>
+        <input type="email" name="correoElectronico" required placeholder="email@dominio.com">
 
-<div class="formulario">
+        <label>Teléfono:</label>
+        <input type="tel" name="telefono" required placeholder="000-000-000">
 
-    <form name="altaClientes" action="Sv_clientes" method="post">
-      <ul>
-        <li>
-                  <input type="hidden" name="id" value="0">
-        
-          <label>Nombre:</label>
-          <input type="text" name="nombre" required placeholder="Nombre">
-        </li>
-
-        <li>
-          <label>Apellidos:</label>
-          <input type="text" name="apellidos" required placeholder="Apellidos">
-        </li>
-
-        <li>
-        <li>
-          <label>Password:</label>
-          <input type="text" name="password" required placeholder="Password">
-        </li>
-          <label>DNI:</label>
-          <input type="dni" name="dni" required placeholder="DNI">
-        </li>
-
-        <li>
-          <label>Dirección:</label>
-          <input type="text" name="direccion" required placeholder="Dirección">
-        </li>
-
-        <li>
-          <label>Teléfono:</label>
-          <input type="telefono" name="telefono" required placeholder="Teléfono">
-        </li>
-
-        <li>
-           <label>Fecha de nacimiento:</label>
-           <input type="date" name="fechaNacimiento" required placeholder="Fecha de nacimiento">
-        </li>
-
-        <li>
-          <label>Correo electrónico</label>
-          <input type="email" name="correoElectronico" required placeholder="Correo electrónico">
-        </li>
-
-        <li>
-          <label>Preferencias del cliente:</label>
-          <input type="text" name="preferenciasCliente" required placeholder="Preferencias del cliente">
-        </li>
-
-        <input type="submit" value="Guardar">
-      </ul>
-    </form>
-    
+        <button type="submit" class="btn-confirmar">CONFIRMAR</button>
+      </form>
     </div>
+  </div>
+
+  <div class="columna">
+    <img src="./img/pexels-josh-hild-1270765-2422265 (1).jpg" style="border-radius: 20px;">
+  </div>
+</div>
+</div>
+
+
+  </nav>
+
+
     
     <div class="datos">
     
@@ -200,8 +186,58 @@ window.onload = function(){
     </div>
     </div>
     
-    
-  </section>
-</div>
+
+  <script>
+  const imageRow = document.getElementById("imageRow");
+
+  const imageSources = [
+    "./img/Apartados.png",   // 0 = Imagen 1
+    "./img/parte1.png",      // 1 = Imagen 2
+    "./img/isla.png"         // 2 = Imagen 3
+  ];
+
+  function setImage(selectedIndex) {
+    const total = imageSources.length;
+    let reordered = [];
+
+    // Imagen anterior a la seleccionada (posición 0)
+    reordered.push(imageSources[(selectedIndex + 1) % total]);
+
+    // Imagen seleccionada (posición 1)
+    reordered.push(imageSources[selectedIndex]);
+
+    // Imagen siguiente a la seleccionada (posición 2)
+    reordered.push(imageSources[(selectedIndex + 2) % total]);
+
+    // Limpiar contenedor
+    imageRow.innerHTML = "";
+
+    // Insertar imágenes en el nuevo orden
+    reordered.forEach((src, index) => {
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = "Imagen";
+      img.classList.add("galeria-img", `pos-${index + 1}`);
+      imageRow.appendChild(img);
+    });
+
+
+    // Resaltar miniatura activa
+    document.querySelectorAll(".thumbnail-bar img").forEach((img, index) => {
+      img.classList.toggle("active", index === selectedIndex);
+    });
+  }
+
+  // Mostrar galería al inicio
+  setImage(0);
+</script>
+
+
+
 </body>
-</html>
+<footer>
+    <p>&copy; 2025 Camping Tipi. Todos los derechos reservados.</p>
+  </footer>
+
+
+<!--/////////////////////////////////////////////////////////////////////////////////////-->
